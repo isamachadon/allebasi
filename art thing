@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Art Generator</title>
+</head>
+<body>
+    <h1>Create Your Custom Art Prompt</h1>
+    <form id="artForm">
+        <label for="mainCharacter">Main Character/Object:</label><br>
+        <input type="text" id="mainCharacter" name="mainCharacter" placeholder="e.g., Velociraptor" required><br><br>
+
+        <label for="action">Action:</label><br>
+        <input type="text" id="action" name="action" placeholder="e.g., saving a bird" required><br><br>
+
+        <label for="setting">Setting:</label><br>
+        <input type="text" id="setting" name="setting" placeholder="e.g., in a hardware store" required><br><br>
+
+        <label for="artStyle">Art Style:</label><br>
+        <input type="text" id="artStyle" name="artStyle" placeholder="e.g., Synchromism" required><br><br>
+
+        <label for="color1">Main Colour 1 (HEX or RGB):</label><br>
+        <input type="text" id="color1" name="color1" placeholder="e.g., #D0D0D0" required><br><br>
+
+        <label for="color2">Main Colour 2 (HEX or RGB):</label><br>
+        <input type="text" id="color2" name="color2" placeholder="e.g., #CB3234" required><br><br>
+
+        <button type="submit">Generate Art Prompt</button>
+    </form>
+
+    <h2>Your Generated Art Prompt:</h2>
+    <p id="generatedPrompt"></p>
+
+    <script>
+        document.getElementById("artForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get form values
+            var mainCharacter = document.getElementById("mainCharacter").value;
+            var action = document.getElementById("action").value;
+            var setting = document.getElementById("setting").value;
+            var artStyle = document.getElementById("artStyle").value;
+            var color1 = document.getElementById("color1").value;
+            var color2 = document.getElementById("color2").value;
+
+            // Generate the prompt
+            var prompt = `Create an art about a ${mainCharacter} ${action} in a ${setting}. The art style must be ${artStyle}, and the main colours must be ${color1} and ${color2}.`;
+
+            // Display the generated prompt
+            document.getElementById("generatedPrompt").innerText = prompt;
+        });
+    </script>
+</body>
+</html>
