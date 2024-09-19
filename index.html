@@ -32,24 +32,41 @@
     <h2>Your Generated Art Prompt:</h2>
     <p id="generatedPrompt"></p>
 
-    <script>
-        document.getElementById("artForm").addEventListener("submit", function(event) {
-            event.preventDefault();
+<script>
+    document.getElementById("artForm").addEventListener("submit", function(event) {
+        event.preventDefault();
 
-            // Get form values
-            var mainCharacter = document.getElementById("mainCharacter").value;
-            var action = document.getElementById("action").value;
-            var setting = document.getElementById("setting").value;
-            var artStyle = document.getElementById("artStyle").value;
-            var color1 = document.getElementById("color1").value;
-            var color2 = document.getElementById("color2").value;
+        var mainCharacter = document.getElementById("mainCharacter").value;
+        var action = document.getElementById("action").value;
+        var setting = document.getElementById("setting").value;
+        var artStyle = document.getElementById("artStyle").value;
+        var color1 = document.getElementById("color1").value;
+        var color2 = document.getElementById("color2").value;
 
-            // Generate the prompt
-            var prompt = `Create an art about a ${mainCharacter} ${action} in a ${setting}. The art style must be ${artStyle}, and the main colours must be ${color1} and ${color2}.`;
+        var data = {
+            "mainCharacter": mainCharacter,
+            "action": action,
+            "setting": setting,
+            "artStyle": artStyle,
+            "color1": color1,
+            "color2": color2
+        };
 
-            // Display the generated prompt
-            document.getElementById("generatedPrompt").innerText = prompt;
+        fetch('http://localhost:5000/generate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("generatedPrompt").innerText = data.result;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
         });
-    </script>
+    });
+</script>
 </body>
 </html>
